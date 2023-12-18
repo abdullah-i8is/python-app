@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask_cors import CORS
 from pynput import mouse, keyboard
 from concurrent.futures import ThreadPoolExecutor
@@ -77,6 +77,9 @@ def get_activity():
 
     return jsonify({"percentage": activity_percentage, "active_window_name": active_window_name})
 
+@app.route('/')
+def runHtm():
+    return render_template("index.html")
 if __name__ == '__main__':
     with ThreadPoolExecutor(max_workers=2) as executor:
         executor.submit(run_listeners)
